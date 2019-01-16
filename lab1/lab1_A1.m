@@ -1,4 +1,5 @@
 %% Part A: Signal Transformation
+%% A.1:
 
 % A.1-I
 impulse = @(n) (n == 0) * 1.0 .* (mod(n, 1) == 0);
@@ -10,19 +11,19 @@ u = @(n) (n >= 0) * 1.0 .* (mod(n,1)==0);
     %calling u(n), the (mod(n,1)==0) term forces the function to be a
     %discrete time function by only saving the values of integer values
     %of n  
- b = u(n+1);
+b = u(n+1);
 
- %A.1-III
- x = @(n) u(n) .* cos((n .* pi) / 5);
- c = x(n);
+%A.1-III
+x = @(n) u(n) .* cos((n .* pi) / 5);
+c = x(n);
  
- %A.1-IV
- x1 = @(n) x(n-3);
- d = x1(n);
+%A.1-IV
+x1 = @(n) x(n-3);
+d = x1(n);
  
- %A.1-V
- x2 = @(n) x(-n);
- e = x2(n);
+%A.1-V
+x2 = @(n) x(-n);
+e = x2(n);
 
 plots = {a,b,c,d,e}; % a cell of objects that holds variables
 titles = {"delta[n-3]", "u[n+1]", "x[n]=cos(pi*n/5)*u[n]", "x1[n]=x[n-3]", "x2[n]=x[-n]"};
