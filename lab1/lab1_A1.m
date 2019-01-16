@@ -26,7 +26,8 @@ x2 = @(n) x(-n);
 e = x2(n);
 
 plots = {a,b,c,d,e}; % a cell of objects that holds variables
-titles = {"delta[n-3]", "u[n+1]", "x[n]=cos(pi*n/5)*u[n]", "x1[n]=x[n-3]", "x2[n]=x[-n]"};
+titles = {"delta[n-3]", "u[n+1]", "x[n]=cos(pi*n/5)*u[n]", ...
+            "x1[n]=x[n-3]", "x2[n]=x[-n]"};
 
 n = [-10:10];   %Creates the range of n, (-10 < n < 10) with steps 
                 %of 1 in between  
