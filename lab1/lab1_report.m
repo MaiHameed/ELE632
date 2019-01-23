@@ -3,6 +3,9 @@
 %% Part A: Signal Transformation
 %% A.1:
 
+n = [-10:10];   %Creates the range of n, (-10 < n < 10) with steps 
+                %of 1 in between  
+
 % A.1-I
 impulse = @(n) (n == 0) * 1.0 .* (mod(n, 1) == 0);
 a = impulse(n-3);
@@ -31,20 +34,23 @@ plots = {a,b,c,d,e}; % a cell of objects that holds variables
 titles = {"delta[n-3]", "u[n+1]", "x[n]=cos(pi*n/5)*u[n]", ...
             "x1[n]=x[n-3]", "x2[n]=x[-n]"};
 
-n = [-10:10];   %Creates the range of n, (-10 < n < 10) with steps 
-                %of 1 in between  
-
 figure
 for i = 1:length(plots)
 	subplot(length(plots),1,i);
 	stem(n,plots{i}); %indexing into a cell using {i} to get 
-                        %the i'th element
+                      %the i'th element
     title(titles{i});
 end
 
-% X1[n] is being time shifted. X2[n] is being time reversed.
+disp('X1[n] is being time shifted. X2[n] is being time reversed.')
 
 %% A.2
+
+clear;
+
+%Note that the range was shortened to -5:35 instead of the original
+%-10:70 since there was a lot of unnecessary empty space.
+n = [-5:35];
 
 %A.2-I
 u = @(n) (n >= 0) * 1.0 .* (mod(n,1)==0);
@@ -62,10 +68,6 @@ c = y2(n);
 plots = {a,b,c};
 titles = {"y[n]=5*exp(-n/8)*(u(n)-u(n-10))","y[3n]","y[n/3]"};
 
-%Note that the range was shortened to -5:35 instead of the original
-%-10:70 since there was a lot of unnecessary empty space.
-n = [-5:35];
-
 figure
 for i = 1:length(plots)
 	subplot(length(plots),1,i);
@@ -78,6 +80,8 @@ end
 
 %% A.3
 
+clear;
+
 u = @(n) (n >= 0) * 1.0 .* (mod(n,1)==0);
 y = @(n) 5*exp(-n/8).*(u(n)-u(n-10));
 y2 = @(n) y(n/3);
@@ -86,7 +90,7 @@ y2 = @(n) y(n/3);
 u1 = @(n) (n >= 0) * 1.0;
 z = @(n) 5*exp(-n/8).*(u1(n)-u1(n-10)); 
 y3 = @(n) z(n/3) .* (mod(n,1)==0);
-n = [-5:0.1:35];
+n = [-5:1:35];
 
 figure 
 subplot(2,1,1);
@@ -97,9 +101,9 @@ subplot(2,1,2);
 stem(n,y3(n));
 title("y3[n]=z[n/3]");
 
-%We notice that y3[n] has more data values than y2[n] because of the 
-%fact that the signal transformation was applied to the continuous signal
-%first, allowing the sampling to sample values that NOW exist in discrete
-%integer values, which previously didn't before stretching the continuous
-%function. 
+disp('We notice that y3[n] has more data values than y2[n] because of the');
+disp('fact that the signal transformation was applied to the continuous'); 
+disp('signal first, allowing the sampling to sample values that NOW exist');
+disp('in discrete integer values, which previously didnt before stretching' );
+disp('the continuous function.');
 
