@@ -108,13 +108,13 @@ disp('in discrete integer values, which previously didnt before stretching' );
 disp('the continuous function.');
 
 %% Part C: Design a Filter: N-point maximum filter
-%% C.1
+
 % The code below is the contents of the function written inside maxFilter.m
 %
 % <include>maxFilter.m</include> 
 % 
+% -- END OF FUNCTION --
 
-%% C.2
 clear; 
 
 n = [0:45];
