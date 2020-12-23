@@ -50,7 +50,7 @@ clear;
 
 %Note that the range was shortened to -5:35 instead of the original
 %-10:70 since there was a lot of unnecessary empty space.
-n = [-5:35];
+n = [-10:70];
 
 %A.2-I
 u = @(n) (n >= 0) * 1.0 .* (mod(n,1)==0);
@@ -75,8 +75,7 @@ for i = 1:length(plots)
     title(titles{i});
 end
 
-%y1[n] and y2[n] are time scaling transforms, a compression and expansion 
-%respectively
+disp('y1[n] and y2[n] are time scaling transforms, a compression and expansion respectively');
 
 %% A.3
 
@@ -90,7 +89,7 @@ y2 = @(n) y(n/3);
 u1 = @(n) (n >= 0) * 1.0;
 z = @(n) 5*exp(-n/8).*(u1(n)-u1(n-10)); 
 y3 = @(n) z(n/3) .* (mod(n,1)==0);
-n = [-5:1:35];
+n = [-10:1:70];
 
 figure 
 subplot(2,1,1);
@@ -106,6 +105,47 @@ disp('fact that the signal transformation was applied to the continuous');
 disp('signal first, allowing the sampling to sample values that NOW exist');
 disp('in discrete integer values, which previously didnt before stretching' );
 disp('the continuous function.');
+
+%% Part B: Recursive Solution of difference equation
+%% B.1
+
+disp('y[n] = y[n - 1] + 0.02 * y[n - 1] + x[n]');
+
+%% B.2
+
+clear;
+
+y = zeros(1, 12);
+y(1) = 1.02 * 2000;
+
+for i = 2:12
+    y(i) = y(i - 1) + 0.02 * y(i - 1);
+end
+
+figure;
+stem(y);
+grid;
+title('Zero-Input Response: y[n]');
+xlabel('Month');
+ylabel('Balance');
+
+%% B.3
+
+clear;
+
+y = zeros(1, 12);
+y(1) = 1.02 * 2000 + 100 * 1;
+
+for i = 2:12
+    y(i) = y(i - 1) + 0.02 * y(i - 1) + 100 * i;
+end
+
+figure;
+stem(y);
+grid
+title('Zero-Input Response: y[n]');
+xlabel('Month');
+ylabel('Balance');
 
 %% Part C: Design a Filter: N-point maximum filter
 %% C.1
@@ -135,3 +175,18 @@ stem(n,maxFilter(12));
 title("Max Filtering with N = 12");
 xlabel("N");
 ylabel("maxFilter(12)");
+
+%% C.3
+disp('As N approaches infinity, the signal approaches a unit step function')
+disp('multiplied by the max value of the signal u[n]*max of x[n] ')
+
+%% Part D: Energy and power of a discrete signal
+%% D.1
+% The code below is the contents of the function written inside D1.m
+%
+% <include>D_1.m</include> 
+% 
+
+%% D.2
+
+[power, energy] = D_1([-9 -6 -3 0 3 6 9], 3)
