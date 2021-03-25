@@ -1,2 +1,2 @@
-# ELE632 Labs
-An archive of all our course projects
+# Signal processing in MatLab
+An archive of all our course projects for our signals and systems course
